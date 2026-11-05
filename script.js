@@ -7,7 +7,11 @@ const numberElement = document.getElementById("number");
 const heightElement = document.getElementById("height");
 const weightElement = document.getElementById("weight");
 const typesElement = document.getElementById("types");
-const buttonElement = document.getElementById("btnCargar");
+const button1Element = document.getElementById("btnCargar");
+const inputElement = document.getElementById("pokemonName");
+const button2Element = document.getElementById("btnBuscar");
+const mensajeElement = document.getElementById("mensaje");
+
 
 async function fetchData(url) {
 
@@ -34,7 +38,11 @@ async function fetchData(url) {
         // Mostrar tipos
         typesElement.innerHTML = "";
 
-        data.types.forEach((element) => {
+        mensajeElement.innerText = "";
+
+        let types = data.types;
+
+        types.forEach((element) => {
 
             let newButton = document.createElement("button");
 
@@ -46,6 +54,8 @@ async function fetchData(url) {
         });
 
     } catch (error) {
+
+        mensajeElement.innerText = "No se ha encontrado el Pokémon";
 
         console.error(error);
 
@@ -59,10 +69,27 @@ function getRandomNumber(min, max) {
 }
 
 // Cargar Pokémon al pulsar el botón
-buttonElement.addEventListener("click", () => {
+button1Element.addEventListener("click", () => {
 
     let number = getRandomNumber(1, 152);
 
     fetchData(`${pokeAPI}${number}`);
+
+});
+
+button2Element.addEventListener("click", () => {
+
+    let nombre = inputElement.value.trim().toLowerCase();
+
+    // Comprobar si el campo está vacío
+    if (nombre === "") {
+
+        mensajeElement.innerText = "Es necesario introducir un nombre";
+
+    } else {
+
+        fetchData(`${pokeAPI}${nombre}`);
+
+    }
 
 });

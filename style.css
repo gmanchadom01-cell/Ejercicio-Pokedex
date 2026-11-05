@@ -140,3 +140,24 @@ body {
 .flying {
     background: #7086c5;
 }
+
+#pokemonName {
+    padding: 8px;
+    width: 90%;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+#btnBuscar {
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#mensaje {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
