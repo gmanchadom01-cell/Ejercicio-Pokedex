@@ -1,0 +1,142 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#card {
+    width: 250px;
+    min-height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(rgb(234, 234, 234), #4d4c4c);
+    border: 3px solid #181818;
+    border-radius: 5%;
+    box-shadow: 3px -3px 2px #707070;
+    padding: 15px;
+}
+
+#image {
+    width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(2px -2px 1px black);
+}
+
+#name, #number {
+    color: white;
+    text-shadow: 3px 3px black;
+}
+
+#height, #weight {
+    color: white;
+    font-weight: bold;
+}
+
+#types {
+    display: flex;
+    gap: 5px;
+}
+
+#types button {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 10px;
+    color: white;
+    text-transform: capitalize;
+}
+
+#btnCargar {
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Tipos de Pokémon */
+
+.fire {
+    background: red;
+}
+
+.grass {
+    background: linear-gradient(rgb(234, 234, 234), rgb(9, 92, 15));
+}
+
+.water {
+    background: linear-gradient(rgb(234, 234, 234), rgb(33, 60, 137));
+}
+
+.electric {
+    background: linear-gradient(rgb(234, 234, 234), rgb(213, 208, 56));
+}
+
+.poison {
+    background: linear-gradient(rgb(234, 234, 234), rgb(83, 5, 84));
+}
+
+.psychic {
+    background: linear-gradient(rgb(234, 234, 234), #c289d1);
+}
+
+.ground {
+    background: linear-gradient(rgb(234, 234, 234), #815911);
+}
+
+.rock {
+    background: linear-gradient(rgb(234, 234, 234), #381800);
+}
+
+.ghost {
+    background: linear-gradient(rgb(234, 234, 234), #24004c);
+}
+
+.bug {
+    background: linear-gradient(rgb(234, 234, 234), #526c00);
+}
+
+.dragon {
+    background: linear-gradient(rgb(234, 234, 234), #1200a3);
+}
+
+.ice {
+    background: linear-gradient(rgb(234, 234, 234), #0096a9);
+}
+
+.normal {
+    background: gray;
+}
+
+.fighting {
+    background: brown;
+}
+
+.fairy {
+    background: pink;
+}
+
+.dark {
+    background: #333;
+}
+
+.steel {
+    background: #777;
+}
+
+.flying {
+    background: #7086c5;
+}
