@@ -17,10 +17,12 @@ async function fetchData(url) {
 
     try {
 
+        mensajeElement.innerText = "Cargando...";
+
         let response = await fetch(url);
 
         if (!response.ok) {
-            throw new Error(`Error de red: ${response.statusText}`);
+            throw new Error(`Pokemon no encontrado`);
         }
 
         let data = await response.json();
@@ -93,3 +95,16 @@ button2Element.addEventListener("click", () => {
     }
 
 });
+/*Pokemon no encontrado
+Objetivo: gestionar correctamente los errores de las peticiones de busqueda
+Punto de partida: Buscador del ejercicio 02
+
+1. Comprueba el valor de response.ok despues de realizar la peticion
+2. Si la API responde con un error, muestra Pokemon no encontrado
+3. Utiliza try-catch para controlar errores de red o problemas al procesar la respuesta
+4. Mientras se espera la respuesta, muestra un texto Cargando...
+5. Al terminar, retira el mensaje de carga y muestra el resultado o error correspondiente
+
+Practicas: estados HTTP, response.ok, try-catch y estados de carga
+
+Comprobacion: Prueba con Pikachu, un nombre inexistente y simulando una desconexion desde las herramientas de desarrollador*/
