@@ -95,16 +95,97 @@ button2Element.addEventListener("click", () => {
     }
 
 });
-/*Pokemon no encontrado
-Objetivo: gestionar correctamente los errores de las peticiones de busqueda
-Punto de partida: Buscador del ejercicio 02
 
-1. Comprueba el valor de response.ok despues de realizar la peticion
-2. Si la API responde con un error, muestra Pokemon no encontrado
-3. Utiliza try-catch para controlar errores de red o problemas al procesar la respuesta
-4. Mientras se espera la respuesta, muestra un texto Cargando...
-5. Al terminar, retira el mensaje de carga y muestra el resultado o error correspondiente
+// MI PRIMERA POKEDEX
 
-Practicas: estados HTTP, response.ok, try-catch y estados de carga
+const listaElement = document.getElementById("listaPokemon");
+const btnAnterior = document.getElementById("btnAnterior");
+const btnSiguiente = document.getElementById("btnSiguiente");
 
-Comprobacion: Prueba con Pikachu, un nombre inexistente y simulando una desconexion desde las herramientas de desarrollador*/
+// URL inicial
+const urlInicial = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
+
+let urlSiguiente = null;
+let urlAnterior = null;
+
+// Cargar lista de Pokémon
+async function cargarLista(url) {
+
+    try {
+
+        let response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Error al cargar los Pokémon");
+        }
+
+        let data = await response.json();
+
+        // Vaciar la lista anterior
+        listaElement.innerHTML = "";
+
+        // Recorrer los resultados
+        data.results.forEach((pokemon) => {
+
+            let nuevoPokemon = document.createElement("li");
+
+            let enlace = document.createElement("a");
+
+            enlace.href = pokemon.url;
+            enlace.innerText = pokemon.name;
+            enlace.target = "_blank";
+
+            nuevoPokemon.appendChild(enlace);
+
+            listaElement.appendChild(nuevoPokemon);
+
+        });
+
+        // Guardar las URLs de navegación
+        urlSiguiente = data.next;
+        urlAnterior = data.previous;
+
+        // Mostrar u ocultar botones
+        btnSiguiente.style.display = urlSiguiente ? "block" : "none";
+        btnAnterior.style.display = urlAnterior ? "block" : "none";
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+// Botón siguiente
+btnSiguiente.addEventListener("click", () => {
+
+    if (urlSiguiente) {
+        cargarLista(urlSiguiente);
+    }
+
+});
+
+// Botón anterior
+btnAnterior.addEventListener("click", () => {
+
+    if (urlAnterior) {
+        cargarLista(urlAnterior);
+    }
+
+});
+
+// Cargar primeros 10 Pokémon
+cargarLista(urlInicial);
+/*Mi primera Pokedex
+Objetivo: recorrer un array de resutados obtenido mediantes AJAX.
+Endpoint: https://pokeapi.co/api/v2/pokemon?limit=10&offset=0
+
+1. Añade un boton siguiente que obtendra los siguientes 10
+2. Recorre el array results de la respuesta
+4. Muestra los nombres en una lista HTML, con un elemento por Pokemon
+5. Convierte cada nombre en un enlace que abraa la URL de detalle proporcionada por la API
+
+Practicas: arrays, forEach(), listas y creacion de elementos HTML
+
+Ampliacion: Implementar boton anterior que solo saldra si hay registros anteriores*/
