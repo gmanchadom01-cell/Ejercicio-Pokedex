@@ -109,6 +109,7 @@ let urlSiguiente = null;
 let urlAnterior = null;
 
 // Cargar lista de Pokémon
+
 async function cargarLista(url) {
 
     try {
@@ -121,31 +122,45 @@ async function cargarLista(url) {
 
         let data = await response.json();
 
-        // Vaciar la lista anterior
         listaElement.innerHTML = "";
 
-        // Recorrer los resultados
-        data.results.forEach((pokemon) => {
+        data.results.forEach(async (pokemon) => {
 
+            // Obtener los detalles de cada Pokémon
+            let respuesta = await fetch(pokemon.url);
+            let detalles = await respuesta.json();
+
+            // Crear elementos HTML
             let nuevoPokemon = document.createElement("li");
 
             let enlace = document.createElement("a");
-
             enlace.href = pokemon.url;
             enlace.innerText = pokemon.name;
             enlace.target = "_blank";
 
+            let imagen = document.createElement("img");
+            imagen.src = detalles.sprites.front_default;
+            imagen.alt = pokemon.name;
+
+            let altura = document.createElement("p");
+            altura.innerText = `Altura: ${detalles.height / 10} m`;
+
+            let peso = document.createElement("p");
+            peso.innerText = `Peso: ${detalles.weight / 10} kg`;
+
+            // Introducir elementos en la lista
             nuevoPokemon.appendChild(enlace);
+            nuevoPokemon.appendChild(imagen);
+            nuevoPokemon.appendChild(altura);
+            nuevoPokemon.appendChild(peso);
 
             listaElement.appendChild(nuevoPokemon);
 
         });
 
-        // Guardar las URLs de navegación
         urlSiguiente = data.next;
         urlAnterior = data.previous;
 
-        // Mostrar u ocultar botones
         btnSiguiente.style.display = urlSiguiente ? "block" : "none";
         btnAnterior.style.display = urlAnterior ? "block" : "none";
 
@@ -156,6 +171,7 @@ async function cargarLista(url) {
     }
 
 }
+
 
 // Botón siguiente
 btnSiguiente.addEventListener("click", () => {
@@ -177,15 +193,3 @@ btnAnterior.addEventListener("click", () => {
 
 // Cargar primeros 10 Pokémon
 cargarLista(urlInicial);
-/*Mi primera Pokedex
-Objetivo: recorrer un array de resutados obtenido mediantes AJAX.
-Endpoint: https://pokeapi.co/api/v2/pokemon?limit=10&offset=0
-
-1. Añade un boton siguiente que obtendra los siguientes 10
-2. Recorre el array results de la respuesta
-4. Muestra los nombres en una lista HTML, con un elemento por Pokemon
-5. Convierte cada nombre en un enlace que abraa la URL de detalle proporcionada por la API
-
-Practicas: arrays, forEach(), listas y creacion de elementos HTML
-
-Ampliacion: Implementar boton anterior que solo saldra si hay registros anteriores*/

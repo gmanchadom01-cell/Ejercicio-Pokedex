@@ -189,13 +189,6 @@ body {
     margin-bottom: 20px;
 }
 
-#listaPokemon li {
-    background: #eaeaea;
-    border: 2px solid #333;
-    padding: 10px;
-    border-radius: 8px;
-}
-
 #listaPokemon a {
     text-decoration: none;
     color: black;
@@ -219,4 +212,25 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+}
+
+#listaPokemon li {
+    background: #eaeaea;
+    border: 2px solid #333;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+#listaPokemon img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+#listaPokemon p {
+    font-size: 14px;
 }
